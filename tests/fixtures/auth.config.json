@@ -1,0 +1,17 @@
+{
+  "description": "Test fixture: automatic login + refresh for auth-config-collection.json. No credentials here.",
+  "login": {
+    "request": "Auth / Login",
+    "tokenPath": "data.accessToken",
+    "tokenVariable": "accessToken",
+    "refreshTokenPath": "data.refreshToken",
+    "refreshTokenVariable": "refreshToken",
+    "expiresInPath": "data.expiresIn"
+  },
+  "refresh": {
+    "enabled": true,
+    "request": "Auth / Refresh Token",
+    "tokenPath": "data.accessToken",
+    "on401": true
+  }
+}

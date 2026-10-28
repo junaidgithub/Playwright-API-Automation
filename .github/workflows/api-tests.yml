@@ -1,0 +1,77 @@
+name: API Tests
+
+# Manual only: GitHub → Actions → "API Tests" → "Run workflow".
+# It never runs on push, pull request or a schedule.
+on:
+  workflow_dispatch:
+    inputs:
+      collection:
+        description: 'Collection file name from the collections/ folder. Leave EMPTY to run ALL collections.'
+        required: false
+        default: ''
+        type: string
+      target_url:
+        description: 'Target base URL override, e.g. https://qa.example.com (empty = URLs inside the collection)'
+        required: false
+        default: ''
+        type: string
+      allow_mutating:
+        description: 'Allow POST/PUT/PATCH/DELETE - tick ONLY for non-production targets'
+        required: false
+        default: false
+        type: boolean
+      request_timeout_ms:
+        description: 'Request timeout in milliseconds'
+        required: false
+        default: '15000'
+        type: string
+      run_self_tests:
+        description: "Also run the tool's own test suite first"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  api-tests:
+    name: Postman collections → Playwright API tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run the tool's own tests
+        if: ${{ inputs.run_self_tests }}
+        run: npm test
+
+      - name: Generate and run API tests
+        # Inputs are passed as environment variables (never pasted into the script) to prevent injection.
+        env:
+          COLLECTION: ${{ inputs.collection }}
+          TARGET_BASE_URL: ${{ inputs.target_url }}
+          ALLOW_MUTATING_REQUESTS: ${{ inputs.allow_mutating }}
+          REQUEST_TIMEOUT_MS: ${{ inputs.request_timeout_ms }}
+          # Repository secrets named PM_VAR_<name> become Postman variables {{name}}; others are ignored.
+          ALL_SECRETS: ${{ toJSON(secrets) }}
+        run: npm run ci
+
+      - name: Upload reports
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-test-reports
+          path: reports/
+          if-no-files-found: warn
+          retention-days: 14

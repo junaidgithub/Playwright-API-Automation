@@ -1,0 +1,22 @@
+{
+  "description": "Copy to auth.config.json and adapt. Never put credentials here: reference variables ({{username}}) and supply values via PM_VAR_<name> or a Postman environment file.",
+  "login": {
+    "request": "Auth / Login",
+    "tokenPath": "data.accessToken",
+    "tokenVariable": "accessToken",
+    "refreshTokenPath": "data.refreshToken",
+    "refreshTokenVariable": "refreshToken",
+    "expiresInPath": "data.expiresIn"
+  },
+  "refresh": {
+    "enabled": false,
+    "request": "Auth / Refresh Token",
+    "on401": true,
+    "beforeExpirySeconds": 30,
+    "retryMutating": false
+  },
+  "defaultAuth": {
+    "type": "bearer",
+    "token": "{{accessToken}}"
+  }
+}

@@ -1,0 +1,1457 @@
+{
+  "info": {
+    "_postman_id": "eaf39d1e-ec5e-4a0b-a58f-automationdemo0001",
+    "name": "JSONPlaceholder.dev - CRUD API Automation Sample",
+    "description": "A practical Postman Collection for testing a Postman-to-Playwright API test generator. Targets the public JSONPlaceholder.dev API. Public demo API; verify current availability before execution.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Posts",
+      "item": [
+        {
+          "name": "Get All Posts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/posts",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "posts"
+              ]
+            },
+            "description": "Retrieve the posts collection"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Post",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/posts/1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "posts",
+                "1"
+              ]
+            },
+            "description": "Retrieve one post by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Posts by User",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/posts?userId=1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "posts"
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "Filter posts by userId"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Post",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/posts",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "posts"
+              ]
+            },
+            "description": "Create a post",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"New Post\",\n  \"body\": \"Post created for API automation demo\",\n  \"userId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Replace Post",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/posts/1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "posts",
+                "1"
+              ]
+            },
+            "description": "Replace a post",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"title\": \"Updated Post\",\n  \"body\": \"Updated post body\",\n  \"userId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Partially Update Post",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/posts/1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "posts",
+                "1"
+              ]
+            },
+            "description": "Patch selected post fields",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Patched Post Title\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Post",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/posts/1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "posts",
+                "1"
+              ]
+            },
+            "description": "Delete a post"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/users",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "users"
+              ]
+            },
+            "description": "Retrieve users"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single User",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/users/1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "users",
+                "1"
+              ]
+            },
+            "description": "Retrieve one user"
+          },
+          "response": []
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/users",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "users"
+              ]
+            },
+            "description": "Create a user",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Junaid Demo\",\n  \"username\": \"junaid_demo\",\n  \"email\": \"junaid@example.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Replace User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/users/1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "users",
+                "1"
+              ]
+            },
+            "description": "Replace a user",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"name\": \"Updated Demo User\",\n  \"username\": \"demo_updated\",\n  \"email\": \"updated@example.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Partially Update User",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/users/1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "users",
+                "1"
+              ]
+            },
+            "description": "Patch a user",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"patched@example.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/users/1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "users",
+                "1"
+              ]
+            },
+            "description": "Delete a user"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Comments",
+      "item": [
+        {
+          "name": "Get All Comments",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/comments",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "comments"
+              ]
+            },
+            "description": "Retrieve comments"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Comments by Post Query",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/comments?postId=1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "comments"
+              ],
+              "query": [
+                {
+                  "key": "postId",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "Filter comments by postId"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Comments for Post",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/posts/1/comments",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "posts",
+                "1",
+                "comments"
+              ]
+            },
+            "description": "Get comments associated with a post"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Comment",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/comments/1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "comments",
+                "1"
+              ]
+            },
+            "description": "Retrieve one comment"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Comment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/comments",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "comments"
+              ]
+            },
+            "description": "Create a comment",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"postId\": 1,\n  \"name\": \"Demo Comment\",\n  \"email\": \"demo@example.com\",\n  \"body\": \"Comment for API automation demo\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Replace Comment",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/comments/1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "comments",
+                "1"
+              ]
+            },
+            "description": "Replace a comment",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"postId\": 1,\n  \"name\": \"Updated Demo\",\n  \"email\": \"demo@example.com\",\n  \"body\": \"Updated comment\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Partially Update Comment",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/comments/1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "comments",
+                "1"
+              ]
+            },
+            "description": "Patch a comment",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"body\": \"Patched comment body\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Comment",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/comments/1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "comments",
+                "1"
+              ]
+            },
+            "description": "Delete a comment"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Albums",
+      "item": [
+        {
+          "name": "Get All Albums",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/albums",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "albums"
+              ]
+            },
+            "description": "Retrieve albums"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Albums by User",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/albums?userId=1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "albums"
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "Filter albums by userId"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Album",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/albums/1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "albums",
+                "1"
+              ]
+            },
+            "description": "Retrieve one album"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Album",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/albums",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "albums"
+              ]
+            },
+            "description": "Create an album",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": 1,\n  \"title\": \"Demo Album\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Replace Album",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/albums/1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "albums",
+                "1"
+              ]
+            },
+            "description": "Replace an album",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"userId\": 1,\n  \"title\": \"Updated Demo Album\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Partially Update Album",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/albums/1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "albums",
+                "1"
+              ]
+            },
+            "description": "Patch an album",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Patched Album\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Album",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/albums/1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "albums",
+                "1"
+              ]
+            },
+            "description": "Delete an album"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Photos",
+      "item": [
+        {
+          "name": "Get All Photos",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/photos",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "photos"
+              ]
+            },
+            "description": "Retrieve photos"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Photos by Album Query",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/photos?albumId=1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "photos"
+              ],
+              "query": [
+                {
+                  "key": "albumId",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "Filter photos by albumId"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Photos for Album",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/albums/1/photos",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "albums",
+                "1",
+                "photos"
+              ]
+            },
+            "description": "Retrieve photos for an album"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Photo",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/photos/1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "photos",
+                "1"
+              ]
+            },
+            "description": "Retrieve one photo"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Photo",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/photos",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "photos"
+              ]
+            },
+            "description": "Create a photo",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"albumId\": 1,\n  \"title\": \"Demo Photo\",\n  \"url\": \"https://example.com/photo.jpg\",\n  \"thumbnailUrl\": \"https://example.com/thumb.jpg\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Replace Photo",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/photos/1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "photos",
+                "1"
+              ]
+            },
+            "description": "Replace a photo",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"albumId\": 1,\n  \"title\": \"Updated Photo\",\n  \"url\": \"https://example.com/photo.jpg\",\n  \"thumbnailUrl\": \"https://example.com/thumb.jpg\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Partially Update Photo",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/photos/1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "photos",
+                "1"
+              ]
+            },
+            "description": "Patch a photo",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Patched Photo\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Photo",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/photos/1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "photos",
+                "1"
+              ]
+            },
+            "description": "Delete a photo"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Todos",
+      "item": [
+        {
+          "name": "Get All Todos",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/todos",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "todos"
+              ]
+            },
+            "description": "Retrieve todos"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Todos by User",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/todos?userId=1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "todos"
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "Filter todos by userId"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Todo",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/todos/1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "todos",
+                "1"
+              ]
+            },
+            "description": "Retrieve one todo"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Todo",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/todos",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "todos"
+              ]
+            },
+            "description": "Create a todo",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": 1,\n  \"title\": \"Test API automation\",\n  \"completed\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Replace Todo",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/todos/1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "todos",
+                "1"
+              ]
+            },
+            "description": "Replace a todo",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"userId\": 1,\n  \"title\": \"Updated todo\",\n  \"completed\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Partially Update Todo",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/todos/1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "todos",
+                "1"
+              ]
+            },
+            "description": "Patch a todo",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"completed\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Todo",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.jsonplaceholder.dev/todos/1",
+              "protocol": "https",
+              "host": [
+                "api",
+                "jsonplaceholder",
+                "dev"
+              ],
+              "path": [
+                "todos",
+                "1"
+              ]
+            },
+            "description": "Delete a todo"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.jsonplaceholder.dev",
+      "type": "string"
+    }
+  ]
+}

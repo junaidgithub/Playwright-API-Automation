@@ -1,0 +1,12 @@
+node_modules/
+.env
+generated-tests/
+generated-tests-ci/
+reports/
+tests/.tmp/
+*.log
+.env.*
+!.env.example
+.claude/
+**/.secrets.json
+**/.runtime-state.json

@@ -1,0 +1,22 @@
+{
+  "name": "postman-to-playwright",
+  "version": "1.0.0",
+  "description": "Convert Postman collections into executable Playwright API tests, run them and produce HTML reports.",
+  "private": true,
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "generate": "node src/cli.js generate",
+    "run-tests": "node src/cli.js run",
+    "test:generated": "playwright test",
+    "test": "node --test --test-concurrency=1 \"tests/*.test.js\"",
+    "ci": "node scripts/ci-run-collections.js"
+  },
+  "engines": {
+    "node": ">=20.12"
+  },
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@playwright/test": "^1.56.1"
+  }
+}

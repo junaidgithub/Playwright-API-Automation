@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Postman to Playwright</title>
+<link rel="stylesheet" href="/styles.css">
+<script src="/app.js" defer></script>
+</head>
+<body>
+<header class="app-header">
+  <div class="wrap header-inner">
+    <div>
+      <div class="eyebrow">QA Automation</div>
+      <h1>Postman → Playwright API Automation</h1>
+      <p class="lead">Upload a Postman collection, generate Playwright API tests, run them and review the report.</p>
+    </div>
+    <div class="header-links">
+      <a id="link-report-top" class="btn ghost" href="/reports/api-report.html" target="_blank" rel="noopener" hidden>Open latest report</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <ol class="stepper" aria-label="Workflow">
+    <li data-step="1" class="active"><span>1</span>Upload</li>
+    <li data-step="2"><span>2</span>Generate</li>
+    <li data-step="3"><span>3</span>Run</li>
+    <li data-step="4"><span>4</span>Results</li>
+  </ol>
+
+  <!-- Step 1 -->
+  <section class="card" id="step-upload">
+    <div class="card-head">
+      <h2><span class="num">1</span> Upload Postman collection</h2>
+      <p class="muted">Postman Collection v2.0 / v2.1 JSON export. The file is only parsed – scripts inside it are never executed.</p>
+    </div>
+    <div class="upload-grid">
+      <label class="dropzone" id="dropzone" for="file-collection">
+        <input type="file" id="file-collection" accept=".json,application/json">
+        <span class="drop-icon" aria-hidden="true">⇪</span>
+        <span class="drop-title">Drop collection JSON here or <u>browse</u></span>
+        <span class="drop-sub" id="collection-name">No file selected</span>
+      </label>
+      <div class="side-input">
+        <label class="field-label" for="file-environment">Postman environment <span class="muted">(optional)</span></label>
+        <input type="file" id="file-environment" accept=".json,application/json">
+        <p class="help">Supplies values for <code>{{variables}}</code> such as base URLs or tokens. Values are kept server-side and masked in reports.</p>
+        <button class="btn" id="btn-validate" disabled>Validate collection</button>
+      </div>
+    </div>
+    <div id="upload-error" class="alert error" role="alert" hidden></div>
+    <div id="validation" hidden>
+      <div class="summary-row" id="validation-kpis"></div>
+      <div id="validation-warnings"></div>
+      <h3 class="sub-h">Requests by folder</h3>
+      <div id="folder-list" class="folder-list"></div>
+    </div>
+  </section>
+
+  <!-- Step 2 -->
+  <section class="card" id="step-generate">
+    <div class="card-head">
+      <h2><span class="num">2</span> Generate Playwright tests</h2>
+      <p class="muted">Creates one spec file per folder in <code>generated-tests/</code>. Postman test scripts are converted where possible; anything unsupported is listed.</p>
+    </div>
+    <button class="btn primary" id="btn-generate" disabled>Generate tests</button>
+    <div id="generate-error" class="alert error" role="alert" hidden></div>
+    <div id="generated" hidden>
+      <div class="summary-row" id="generated-kpis"></div>
+      <div id="generated-notes"></div>
+      <h3 class="sub-h">Generated code</h3>
+      <div class="code-viewer">
+        <div class="code-tabs" id="code-tabs" role="tablist"></div>
+        <pre id="code-view" class="code" tabindex="0"></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step 3 -->
+  <section class="card" id="step-run">
+    <div class="card-head">
+      <h2><span class="num">3</span> Run tests</h2>
+      <p class="muted">Runs the generated suite with Playwright Test (<code>APIRequestContext</code>). Settings apply to this run only.</p>
+    </div>
+    <form id="run-form" class="run-form">
+      <div class="field wide">
+        <label class="field-label" for="opt-target">Target base URL override</label>
+        <input type="url" id="opt-target" placeholder="Leave empty to use the URLs in the collection">
+        <p class="help">Replaces scheme, host and port of every request (paths and query strings are kept). Example: your QA/staging server.</p>
+      </div>
+      <div class="field">
+        <label class="field-label" for="opt-timeout">Request timeout (ms)</label>
+        <input type="number" id="opt-timeout" min="500" max="600000" step="500" value="15000">
+      </div>
+      <div class="field">
+        <label class="field-label" for="opt-workers">Workers</label>
+        <input type="number" id="opt-workers" min="1" max="8" value="1">
+        <p class="help">Forced to 1 when requests depend on each other.</p>
+      </div>
+      <div class="field">
+        <label class="field-label" for="opt-baseline">Baseline status check</label>
+        <select id="opt-baseline">
+          <option value="2xx">2xx (success) expected</option>
+          <option value="non-5xx">Anything but 5xx</option>
+          <option value="none">No baseline status check</option>
+        </select>
+        <p class="help">Used only when the collection defines no expected status.</p>
+      </div>
+      <div class="field wide">
+        <label class="check">
+          <input type="checkbox" id="opt-mutating">
+          <span><b>Allow POST / PUT / PATCH / DELETE</b> – I confirm the target is <u>not production</u>. When unticked these requests are skipped.</span>
+        </label>
+      </div>
+    </form>
+    <button class="btn primary" id="btn-run" disabled>Run tests</button>
+    <div id="run-error" class="alert error" role="alert" hidden></div>
+    <div id="run-status" class="run-status" hidden>
+      <div class="status-line"><span class="spinner" id="spinner" aria-hidden="true"></span><span id="status-text">Running…</span></div>
+      <div class="progress"><span id="progress-bar"></span></div>
+      <details id="log-details">
+        <summary>Execution log</summary>
+        <pre id="run-log" class="code log"></pre>
+      </details>
+    </div>
+  </section>
+
+  <!-- Step 4 -->
+  <section class="card" id="step-results" hidden>
+    <div class="card-head row">
+      <div>
+        <h2><span class="num">4</span> Results</h2>
+        <p class="muted" id="results-sub"></p>
+      </div>
+      <div class="actions">
+        <a class="btn primary" id="link-report" href="/reports/api-report.html" target="_blank" rel="noopener">Open HTML report</a>
+        <a class="btn" id="link-pw-report" href="/reports/playwright-report/index.html" target="_blank" rel="noopener" hidden>Playwright report</a>
+        <a class="btn ghost" href="/reports/summary.json?download=1">Download summary.json</a>
+      </div>
+    </div>
+    <div id="verdict" class="verdict"></div>
+    <div class="summary-row" id="result-kpis"></div>
+    <div class="result-bar"><span class="p" id="bar-pass"></span><span class="f" id="bar-fail"></span><span class="s" id="bar-skip"></span></div>
+    <h3 class="sub-h">Failed requests</h3>
+    <div id="failed-list"></div>
+    <h3 class="sub-h">All requests</h3>
+    <div class="table-scroll">
+      <table class="results">
+        <thead><tr><th>#</th><th>Result</th><th>Request</th><th>Folder</th><th class="num">HTTP</th><th class="num">Time</th></tr></thead>
+        <tbody id="result-rows"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+<footer class="wrap app-footer">Runs locally · uploaded collections are treated as untrusted data · secrets are redacted in logs and reports</footer>
+</body>
+</html>

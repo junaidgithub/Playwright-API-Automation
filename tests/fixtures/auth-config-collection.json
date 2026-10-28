@@ -1,0 +1,76 @@
+{
+  "info": {
+    "_postman_id": "00000000-test-fixture-auth-config",
+    "name": "Test Fixture - Configured Authentication",
+    "description": "Synthetic collection without Postman scripts: login, token reuse and refresh are driven only by auth.config.json. Credentials come from PM_VAR_* variables at run time.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [{ "key": "token", "value": "{{accessToken}}", "type": "string" }]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://127.0.0.1:1" },
+    { "key": "invalidToken", "value": "deliberately-invalid-token" }
+  ],
+  "item": [
+    {
+      "name": "Account",
+      "item": [
+        { "name": "Get Profile", "request": { "method": "GET", "url": "{{baseUrl}}/secure/profile" } },
+        { "name": "Get Orders", "request": { "method": "GET", "url": "{{baseUrl}}/secure/orders" } },
+        { "name": "Get Settings", "request": { "method": "GET", "url": "{{baseUrl}}/secure/settings" } },
+        { "name": "Public Health", "request": { "method": "GET", "auth": { "type": "noauth" }, "url": "{{baseUrl}}/health" } },
+        {
+          "name": "Basic Protected",
+          "request": {
+            "method": "GET",
+            "auth": { "type": "basic", "basic": [{ "key": "username", "value": "{{basicUser}}" }, { "key": "password", "value": "{{basicPass}}" }] },
+            "url": "{{baseUrl}}/basic"
+          }
+        },
+        {
+          "name": "API Key Protected",
+          "request": {
+            "method": "GET",
+            "auth": { "type": "apikey", "apikey": [{ "key": "key", "value": "X-API-Key" }, { "key": "value", "value": "{{apiKey}}" }, { "key": "in", "value": "header" }] },
+            "url": "{{baseUrl}}/keyed"
+          }
+        },
+        {
+          "name": "Invalid token is rejected (negative test)",
+          "event": [{ "listen": "test", "script": { "exec": ["pm.test('401 expected', () => pm.response.to.have.status(401));"] } }],
+          "request": {
+            "method": "GET",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{invalidToken}}" }] },
+            "url": "{{baseUrl}}/secure/profile"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "auth": { "type": "noauth" },
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"username\": \"{{username}}\", \"password\": \"{{password}}\" }", "options": { "raw": { "language": "json" } } },
+            "url": "{{baseUrl}}/auth/login"
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"refreshToken\": \"{{refreshToken}}\" }", "options": { "raw": { "language": "json" } } },
+            "url": "{{baseUrl}}/auth/refresh"
+          }
+        }
+      ]
+    }
+  ]
+}
